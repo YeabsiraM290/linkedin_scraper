@@ -42,9 +42,6 @@ class XLSXPipeline(object):
 
     def process_item(self, item, spider):
         adapter = ItemAdapter(item)
-        print("*" * 100)
-        print(item)
-        print("*" * 100)
 
         self.ws.append(
             [

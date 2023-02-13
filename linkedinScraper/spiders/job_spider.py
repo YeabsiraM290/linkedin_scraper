@@ -1,17 +1,6 @@
+from linkedinScraper.models.linkedin_job_model import LinkedinJobItem
+
 import scrapy
-
-
-class LinkedinJobItem(scrapy.Item):
-    job_title = scrapy.Field()
-    date = scrapy.Field()
-    company_name = scrapy.Field()
-    company_location = scrapy.Field()
-    company_url = scrapy.Field()
-    seniority_level = scrapy.Field()
-    employment_type = scrapy.Field()
-    job_function = scrapy.Field()
-    industries = scrapy.Field()
-
 
 class LinkedinJobSpider(scrapy.Spider):
     name = "job_scraper"
