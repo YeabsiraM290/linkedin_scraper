@@ -3,7 +3,7 @@ from linkedinScraper.models.linkedin_job_model import LinkedinJobItem
 import scrapy
 
 class LinkedinJobSpider(scrapy.Spider):
-    name = "job_scraper"
+    name = "job_spider"
 
     start_urls = [
         "https://www.linkedin.com/jobs/search?keywords=Information%20Technology%20Specialist"
