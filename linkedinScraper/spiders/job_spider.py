@@ -1,5 +1,16 @@
-from email.policy import default
 import scrapy
+
+
+class LinkedinJobItem(scrapy.Item):
+    job_title = scrapy.Field()
+    date = scrapy.Field()
+    company_name = scrapy.Field()
+    company_location = scrapy.Field()
+    company_url = scrapy.Field()
+    seniority_level = scrapy.Field()
+    employment_type = scrapy.Field()
+    job_function = scrapy.Field()
+    industries = scrapy.Field()
 
 
 class LinkedinJobSpider(scrapy.Spider):
@@ -34,37 +45,60 @@ class LinkedinJobSpider(scrapy.Spider):
                 "span.description__job-criteria-text.description__job-criteria-text--criteria::text"
             ).getall()
 
-            yield {
-                "jobs": [
-                    {
-                        "job_title": extract_with_css("h1.top-card-layout__title"),
-                        "date": extract_with_css(
-                            "span.posted-time-ago__text.topcard__flavor--metadata"
-                        ),
-                        "company_name": extract_with_css(
-                            "a.topcard__org-name-link.topcard__flavor--black-link"
-                        ),
-                        "company_location": extract_with_css(
-                            "span.topcard__flavor.topcard__flavor--bullet"
-                        ),
-                        "company_logo": extrat_img_src(
-                            "img.artdeco-entity-image.artdeco-entity-image--square-4.lazy-loaded"
-                        ),
-                        "company_url": extrat_link_address(
-                            "a.topcard__org-name-link.topcard__flavor--black-link"
-                        ),
-                        "seniority_level": job_criteria[0].strip(),
-                        "employment_type": job_criteria[1].strip(),
-                        "job_function": job_criteria[2].strip(),
-                        "industries": job_criteria[3].strip(),
-                        "extra_info": extract_with_css(
-                            "span.num-applicants__caption topcard__flavor--metadata.topcard__flavor--bullet"
-                        ),
-                        "job_description": extract_with_css(
-                            "div.show-more-less-html__markup"
-                        ),
-                    }
-                ]
-            }
-        except:
-            pass
+            job = LinkedinJobItem()
+            job["job_title"] = extract_with_css("h1.top-card-layout__title")
+            job["date"] = extract_with_css(
+                "span.posted-time-ago__text.topcard__flavor--metadata"
+            )
+            job["company_name"] = extract_with_css(
+                "a.topcard__org-name-link.topcard__flavor--black-link"
+            )
+            job["company_location"] = extract_with_css(
+                "span.topcard__flavor.topcard__flavor--bullet"
+            )
+            job["company_url"] = extrat_link_address(
+                "a.topcard__org-name-link.topcard__flavor--black-link"
+            )
+            job["seniority_level"] = job_criteria[0].strip()
+            job["employment_type"] = job_criteria[1].strip()
+            job["job_function"] = job_criteria[2].strip()
+            job["industries"] = job_criteria[3].strip()
+
+            yield job
+
+            # yield {
+            #     "jobs": [
+            #         {
+            #             "job_title": extract_with_css("h1.top-card-layout__title"),
+            #             "date": extract_with_css(
+            #                 "span.posted-time-ago__text.topcard__flavor--metadata"
+            #             ),
+            #             "company_name": extract_with_css(
+            #                 "a.topcard__org-name-link.topcard__flavor--black-link"
+            #             ),
+            #             "company_location": extract_with_css(
+            #                 "span.topcard__flavor.topcard__flavor--bullet"
+            #             ),
+            #             "company_logo": extrat_img_src(
+            #                 "img.artdeco-entity-image.artdeco-entity-image--square-4.lazy-loaded"
+            #             ),
+            #             "company_url": extrat_link_address(
+            #                 "a.topcard__org-name-link.topcard__flavor--black-link"
+            #             ),
+            #             "seniority_level": job_criteria[0].strip(),
+            #             "employment_type": job_criteria[1].strip(),
+            #             "job_function": job_criteria[2].strip(),
+            #             "industries": job_criteria[3].strip(),
+            #             "extra_info": extract_with_css(
+            #                 "span.num-applicants__caption topcard__flavor--metadata.topcard__flavor--bullet"
+            #             ),
+            #             "job_description": extract_with_css(
+            #                 "div.show-more-less-html__markup"
+            #             ),
+            #         }
+            #     ]
+            # }
+        except Exception as e:
+            print("*" * 100)
+            print(e)
+            print("*" * 100)
