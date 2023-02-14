@@ -8,7 +8,6 @@
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 from datetime import datetime
-import os
 
 BOT_NAME = "linkedinScraper"
 
@@ -93,7 +92,7 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Set settings whose default value is deprecated to a future-proof value
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
-TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
+
 FEED_EXPORT_ENCODING = "utf-8"
 
 ITEM_PIPELINES = {
@@ -101,22 +100,3 @@ ITEM_PIPELINES = {
 }
 
 XLSX_PATH = f"data/jobs_result {datetime.now()}.xlsx"
-
-DOWNLOAD_HANDLERS = {
-    "http": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
-    "https": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
-}
-TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
-PLAYWRIGHT_BROWSER_TYPE = "chromium"  # firefox #webkit
-PLAYWRIGHT_LAUNCH_OPTIONS = {
-    "headless": False,
-    # "timeout": 20 * 1000,  # 20 seconds
-}
-
-PLAYWRIGHT_CONTEXTS = {
-    "persistent": {
-        "user_data_dir": os.path.join(
-            os.getcwd(), "tmp/playwright"
-        ),  # will be a persistent context
-    },
-}
