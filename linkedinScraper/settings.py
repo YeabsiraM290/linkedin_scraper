@@ -103,11 +103,11 @@ XLSX_PATH = f"data/jobs_result {datetime.now()}.xlsx"
 
 from shutil import which
 
-SELENIUM_DRIVER_NAME = "chrome"
-SELENIUM_BROWSER_EXECUTABLE_PATH = which("/usr/bin/google-chrome-stable")
-SELENIUM_DRIVER_EXECUTABLE_PATH = which(
-    "/home/yeabsira/Programs/chrome_driver/chromedriver"
-)
-SELENIUM_DRIVER_ARGUMENTS = ["--head", "detach"]
+# SELENIUM_DRIVER_NAME = "chrome"
+# SELENIUM_BROWSER_EXECUTABLE_PATH = which("/usr/bin/google-chrome-stable")
+# SELENIUM_DRIVER_EXECUTABLE_PATH = which(
+#     "/home/yeabsira/Programs/chrome_driver/chromedriver"
+# )
+# SELENIUM_DRIVER_ARGUMENTS = ["--head", "detach"]
 
-DOWNLOADER_MIDDLEWARES = {"scrapy_selenium.SeleniumMiddleware": 800}
+# DOWNLOADER_MIDDLEWARES = {"scrapy_selenium.SeleniumMiddleware": 800}
